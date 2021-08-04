@@ -27,7 +27,7 @@ export class App extends React.Component<{}, AppState> {
     return (
       <div className="max-w-7xl mx-auto min-h-screen">
         <Navbar user={this.state.user} />
-        <Routes authService={this.authService} setUser={this.setUser} />
+        <Routes authService={this.authService} setUser={this.setUser} user={this.state.user} />
       </div>
     )
   }
