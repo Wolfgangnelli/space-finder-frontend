@@ -14,25 +14,25 @@ export class SpaceComponent extends Component<SpaceComponentProps> {
 
     private renderPhoto = () => {
         if(this.props.photoUrl) {
-            return <img src={this.props.photoUrl} alt={this.props.spaceId} className="absolute inset-0 w-full h-full" />
+            return <img src={this.props.photoUrl} alt={this.props.spaceId} className=" object-cover rounded-t-lg" />
         } else {
-            return <img src={genericImg} alt="generic image" className="absolute inset-0 w-full h-full" />
+            return <img src={genericImg} alt="generic image" className="object-cover rounded-t-lg" />
         }
     }
 
     render() {
         return (
-            <figure className="group rounded-lg hover:bg-white shadow-sm ring-1 ring-black ring-opacity-5">
-            <div className="realative bg-gray-50 overflow-hidden">
-                <div className="absolute inset-0 w-full h-full rounded-t-lg overflow-hidden">
+            <figure className="group rounded-lg hover:bg-gray-50 bg-white shadow-sm ring-1 ring-black ring-opacity-5">
                     {this.renderPhoto()}
+            <figcaption className="py-3 px-4 flex items-center justify-between">
+                <div>
+                    <p className="text-indigo-600 font-medium group-hover:text-gray-900">{this.props.name}</p>
+                    <p className="text-indigo-500 group-hover:text-gray-500">{this.props.location}</p>
+                    <p className="text-indigo-500 group-hover:text-gray-500">{this.props.spaceId}</p>
                 </div>
-            </div>
-            <figcaption className="py-3 px-4">
-                <p className="text-indigo-600 group-hover:text-gray-900">{this.props.name}</p>
-                <p className="text-indigo-500 group-hover:text-gray-500">{this.props.spaceId}</p>
-                <p className="text-indigo-500 group-hover:text-gray-500">{this.props.location}</p>
-                <button onClick={() => this.props.reserveSpace(this.props.spaceId)}>Reverve</button>
+                <div>
+                     <button className="px-4 py-2 bg-indigo-700 hover:bg-indigo-600 text-white font-semibold" onClick={() => this.props.reserveSpace(this.props.spaceId)}>Reserve</button>
+                </div>
             </figcaption>
             </figure>
         )
