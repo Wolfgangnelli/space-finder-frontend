@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 
-interface ConfirmModelProps {
+interface ConfirmModalProps {
     show: boolean,
-    spaceId: string,
     textContent: string,
     closeModal: () => void
 }
 
-export class ConfirmModel extends Component<ConfirmModelProps> {
+export class ConfirmModal extends Component<ConfirmModalProps> {
     render() {
         if(this.props.show) {
             return (
