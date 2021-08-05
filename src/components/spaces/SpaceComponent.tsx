@@ -22,16 +22,16 @@ export class SpaceComponent extends Component<SpaceComponentProps> {
 
     render() {
         return (
-            <figure>
+            <figure className="group rounded-lg hover:bg-white shadow-sm ring-1 ring-black ring-opacity-5">
             <div className="realative bg-gray-50 overflow-hidden">
                 <div className="absolute inset-0 w-full h-full rounded-t-lg overflow-hidden">
                     {this.renderPhoto()}
                 </div>
             </div>
             <figcaption className="py-3 px-4">
-                <p>{this.props.name}</p>
-                <p>{this.props.spaceId}</p>
-                <p>{this.props.location}</p>
+                <p className="text-indigo-600 group-hover:text-gray-900">{this.props.name}</p>
+                <p className="text-indigo-500 group-hover:text-gray-500">{this.props.spaceId}</p>
+                <p className="text-indigo-500 group-hover:text-gray-500">{this.props.location}</p>
                 <button onClick={() => this.props.reserveSpace(this.props.spaceId)}>Reverve</button>
             </figcaption>
             </figure>
