@@ -5,9 +5,11 @@ import { Home } from '../pages/Home'
 import { Login } from '../pages/Login'
 import { Profile } from '../pages/Profile'
 import { AuthService } from '../services/AuthService'
+import { DataService } from '../services/DataService'
 
 interface RoutesProps {
     authService: AuthService,
+    dataService: DataService,
     setUser: (user: User) => void
     user: User | undefined
 }
