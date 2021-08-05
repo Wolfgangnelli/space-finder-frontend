@@ -16,7 +16,7 @@ export class SpaceComponent extends Component<SpaceComponentProps> {
         if(this.props.photoUrl) {
             return <img src={this.props.photoUrl} alt={this.props.spaceId} className=" object-cover rounded-t-lg" />
         } else {
-            return <img src={genericImg} alt="generic image" className="object-cover rounded-t-lg" />
+            return <img src={genericImg} alt={this.props.location} className="object-cover rounded-t-lg" />
         }
     }
 
