@@ -39,7 +39,7 @@ export default class Spaces extends Component<SpacesProps, SpacesState> {
         const rows: any[] = [];
         if(this.state.spaces.length > 0) {
             for (const space of this.state.spaces) {
-                rows.push(<SpaceComponent spaceId={space.spaceId} name={space.name} location={space.location} reserveSpace={this.reserveSpace} />)
+                rows.push(<SpaceComponent key={space.location} spaceId={space.spaceId} name={space.name} location={space.location} reserveSpace={this.reserveSpace} />)
             }
         }
         return rows;
@@ -47,9 +47,9 @@ export default class Spaces extends Component<SpacesProps, SpacesState> {
 
     render() {
         return (
-            <div className="grid grid-cols-3 xl:grid-col-4 py-8 gap-x-8 gap-y-6">
-                <h2 className="col-span-3 xl:col-span-1 text-gray-900 font-semibold">Welcome to the Spaces page!</h2>
-                <div className="col-span-3 grid sm:grid-cols-2 md:grid-cols-3 sm:gap-y-8 lg:gap-x-8">
+            <div className="grid grid-cols-3 lg:grid-col-4 py-8 sm:px-4 gap-x-8 gap-y-6">
+                <h2 className="col-span-3 lg:col-span-1 text-gray-900 font-semibold">Welcome to the Spaces page!</h2>
+                <div className="col-span-3 grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-y-8 sm:gap-x-6 lg:gap-x-8">
                     {this.renderSpaces()}
                 </div>
             </div>

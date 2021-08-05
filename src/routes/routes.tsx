@@ -4,6 +4,7 @@ import { User } from '../models/user.model'
 import { Home } from '../pages/Home'
 import { Login } from '../pages/Login'
 import { Profile } from '../pages/Profile'
+import Spaces from '../pages/Spaces'
 import { AuthService } from '../services/AuthService'
 import { DataService } from '../services/DataService'
 
@@ -23,6 +24,9 @@ export const Routes: React.FC<RoutesProps> = (props) => {
             </Route>
             <Route path="/login">
                 <Login authService={props.authService} setUser={props.setUser} />
+            </Route>
+            <Route path="/spaces">
+                <Spaces dataService={props.dataService} />
             </Route>
         </Switch>
     )

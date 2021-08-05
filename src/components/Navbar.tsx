@@ -16,6 +16,7 @@ export class Navbar extends Component<{ user: User | undefined }> {
                 <div className="flex items-center justify-self-start">
                     <Link to="/" className="h-full py-1 px-2 text-white font-semibold hover:text-indigo-500 flex items-center">Home</Link>
                     <Link to="/profile" className="h-full py-1 px-2 text-white font-semibold hover:text-indigo-500 flex items-center">Profile</Link>
+                    <Link to="/spaces" className="h-full py-1 px-2 text-white font-semibold hover:text-indigo-500 flex items-center">Spaces</Link>
                 </div>
                 {loginLogOut}
             </div>
