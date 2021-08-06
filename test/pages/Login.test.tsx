@@ -12,7 +12,7 @@ describe('Login component test suite', () => {
 
     beforeEach(() => {
         container = document.createElement('div');
-        document.appendChild(container);
+        document.body.appendChild(container);
         ReactDOM.render(
             <Login authService={authServiceMock as any} setUser={setUserMock} />,
             container
@@ -24,8 +24,23 @@ describe('Login component test suite', () => {
         container.remove();
         jest.clearAllMocks();
     })
-    test('Initial test', () => {
-        expect(true).toBeTruthy();
+    test('Renders correctly initial document', () => {
+        //query the document for verify if the title h2 (Please Login) is rendered correctly
+        const title = document.querySelector('h2')!;
+        expect(title.textContent).toBe('Please login');
+
+        //test input fields
+        const inputs = document.querySelectorAll('input')!;
+        expect(inputs).toHaveLength(4);
+        expect(inputs[0].value).toBe('');
+        expect(inputs[1].value).toBe('');
+        expect(inputs[2].value).toBe('LOGIN');
+        expect(inputs[3].value).toBe('RESET');
+
+        // verify if the login message isn't visible in the initial document
+        const label = document.getElementById('login-message');
+        expect(label).not.toBeInTheDocument();
+
     })
     
 })
