@@ -15,8 +15,10 @@ const config:Config.InitialOptions = {
     testEnvironment: "jsdom",
     collectCoverage: true,
     collectCoverageFrom: [
-        "src/**/*.{ts,tsx}"
+        "src/**/*.{ts,tsx}",
+        "!src/services/**",
+        "!src/react-app-env.d.ts"
     ]
 }
-
+ /*istanbul ignore file */
 export default config;
