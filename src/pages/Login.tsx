@@ -100,7 +100,7 @@ export class Login extends Component<LoginProps, LoginState> {
                     </div>
                 </form>
                 {this.state.loginAttenpted &&
-                    <div className="w-full p-6 mt-2 bg-indigo-600 rounded text-white font-semibold">
+                    <div id="login-message" className="w-full p-6 mt-2 bg-indigo-600 rounded text-white font-semibold">
                         {loginMessage}
                     </div>
                 }
