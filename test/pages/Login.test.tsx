@@ -1,6 +1,14 @@
 import ReactDOM from "react-dom";
 import {Login} from "../../src/pages/Login";
-import {fireEvent} from '@testing-library/react'
+import {fireEvent, waitFor} from '@testing-library/react'
+import { User } from "../../src/models/user.model";
+import history from '../../src/utils/history';
+
+
+const someUser: User = {
+    userName: 'someUser',
+    email: 'someEmail'
+}
 
 // Test Suite
 describe('Login component test suite', () => {
@@ -10,6 +18,10 @@ describe('Login component test suite', () => {
        login: jest.fn()
    }
    const setUserMock = jest.fn();
+
+   const historyMock = history;
+   history.push = jest.fn();
+
 
     beforeEach(() => {
         container = document.createElement('div');
@@ -65,6 +77,56 @@ describe('Login component test suite', () => {
             'someUser',
             'somePassword'
         );
+    })
+
+    test('Correctly handles login sucess', async () => {
+        //simulo la resolve della promise diciamo
+        authServiceMock.login.mockResolvedValue(someUser);
+
+        const inputs = document.querySelectorAll('input');
+        const usernameInput = inputs[0];
+        const passwordInput = inputs[1];
+        const loginBtn = inputs[2];
+        const resetBtn = inputs[3];
+
+        fireEvent.change(usernameInput, {target: {value: 'someUser'}});
+        fireEvent.change(passwordInput, {target: {value: 'somePassword'}});
+        fireEvent.click(loginBtn);
+
+        // in questo modo posso aspettare e verificare nell'eventualità che questo elemento appaia nel mio componente
+        const statusLabel = await waitFor(() => document.getElementById('login-message'));
+        expect(statusLabel).toBeInTheDocument();
+        expect(statusLabel).toHaveTextContent('Login successful');
+        // testo se viene chiamato setUser
+        expect(setUserMock).toBeCalledWith(someUser);
+        //verifico che al termine lo user autenticato sia reindirizzato alla pagina /profile
+        expect(historyMock.push).toBeCalledWith('/profile');
+
+        fireEvent.click(resetBtn);
+
+    })
+    
+    test('Correctly handles login failed', async () => {
+        //simulo la resolve della promise diciamo, qui fallisce
+        authServiceMock.login.mockResolvedValue(undefined);
+
+        const inputs = document.querySelectorAll('input');
+        const usernameInput = inputs[0];
+        const passwordInput = inputs[1];
+        const loginBtn = inputs[2];
+        const resetBtn = inputs[3];
+
+        fireEvent.change(usernameInput, {target: {value: 'someUser'}});
+        fireEvent.change(passwordInput, {target: {value: 'somePassword'}});
+        fireEvent.click(loginBtn);
+
+        // in questo modo posso aspettare e verificare nell'eventualità che questo elemento appaia nel mio componente
+        const statusLabel = await waitFor(() => document.getElementById('login-message'));
+        expect(statusLabel).toBeInTheDocument();
+        expect(statusLabel).toHaveTextContent('Login failed');
+
+        fireEvent.click(resetBtn);
+
     })
     
 })

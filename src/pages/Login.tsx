@@ -74,9 +74,9 @@ export class Login extends Component<LoginProps, LoginState> {
         let loginMessage: any;
         if (this.state.loginAttenpted) {
             if (this.state.loginSuccesfull) {
-                loginMessage = <p>Login successful</p>
+                loginMessage = 'Login successful'
             } else {
-                loginMessage = <p>Login failed</p>
+                loginMessage = 'Login failed'
             }
         }
 
@@ -100,9 +100,9 @@ export class Login extends Component<LoginProps, LoginState> {
                     </div>
                 </form>
                 {this.state.loginAttenpted &&
-                    <div id="login-message" className="w-full p-6 mt-2 bg-indigo-600 rounded text-white font-semibold">
+                    <label id="login-message" className="w-full p-6 mt-2 bg-indigo-600 rounded text-white font-semibold">
                         {loginMessage}
-                    </div>
+                    </label>
                 }
             </div>
         )
