@@ -1,7 +1,8 @@
 import ReactDOM from "react-dom";
 import {Login} from "../../src/pages/Login";
+import {fireEvent} from '@testing-library/react'
 
-
+// Test Suite
 describe('Login component test suite', () => {
 
    let container: HTMLDivElement;
@@ -24,6 +25,8 @@ describe('Login component test suite', () => {
         container.remove();
         jest.clearAllMocks();
     })
+
+    //test rendering login components correctly
     test('Renders correctly initial document', () => {
         //query the document for verify if the title h2 (Please Login) is rendered correctly
         const title = document.querySelector('h2')!;
@@ -41,6 +44,27 @@ describe('Login component test suite', () => {
         const label = document.getElementById('login-message');
         expect(label).not.toBeInTheDocument();
 
+    })
+
+    //test login user interaction with @testing-library/react
+    test('Passes credential correctly ', () => {
+        const inputs = document.querySelectorAll('input');
+        const usernameInput = inputs[0];
+        const passwordInput = inputs[1];
+        const loginBtn = inputs[2];
+        const resetBtn = inputs[3];
+
+        // simulo l'inserimento di valori nei campi input e il click del buttons
+        fireEvent.change(usernameInput, {target: {value: 'someUser'}});
+        fireEvent.change(passwordInput, {target: {value: 'somePassword'}});
+        fireEvent.click(loginBtn);
+        fireEvent.click(resetBtn);
+
+        // simulo la verifica dei dati usando la fun login di authService come sarebbe in realtà nell'app
+        expect(authServiceMock.login).toBeCalledWith(
+            'someUser',
+            'somePassword'
+        );
     })
     
 })
