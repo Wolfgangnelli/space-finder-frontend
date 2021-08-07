@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import {Navbar} from '../../src/components/Navbar';
 import { User } from '../../src/models/user.model';
 import {StaticRouter} from 'react-router'
+import {getByTestId} from '@testing-library/react'
 
 
 const someUser: User = {
@@ -37,6 +38,49 @@ describe('Navbar test suite', () => {
         expect(links[3].href).toBe(`${baseUrl}/logout`);
 
     })
+
+    test('renders link correctly with user using data test', () => {
+        container = document.createElement('div');
+        document.body.appendChild(container);
+        ReactDOM.render(
+            <StaticRouter>
+            <Navbar user={someUser} />
+            </StaticRouter>,
+            container
+        );
+        const homeLink = getByTestId(container, 'home-link') as HTMLAnchorElement;
+        const profileLink = getByTestId(container, 'profile-link') as HTMLAnchorElement;
+        const spacesLink = getByTestId(container, 'spaces-link') as HTMLAnchorElement;
+        const logoutLink = getByTestId(container, 'logout-link') as HTMLAnchorElement;
+
+        expect(homeLink.href).toBe(`${baseUrl}/`);
+        expect(profileLink.href).toBe(`${baseUrl}/profile`);
+        expect(spacesLink.href).toBe(`${baseUrl}/spaces`);
+        expect(logoutLink.href).toBe(`${baseUrl}/logout`);
+
+    })
+
+    test('renders links correctly without user using data test', () => {
+        container = document.createElement('div');
+        document.body.appendChild(container);
+        ReactDOM.render(
+            <StaticRouter>
+            <Navbar user={undefined} />
+            </StaticRouter>,
+            container
+        );
+
+        const homeLink = getByTestId(container, 'home-link') as HTMLAnchorElement;
+        const profileLink = getByTestId(container, 'profile-link') as HTMLAnchorElement;
+        const spacesLink = getByTestId(container, 'spaces-link') as HTMLAnchorElement;
+        const loginLink = getByTestId(container, 'login-link') as HTMLAnchorElement;
+
+        expect(homeLink.href).toBe(`${baseUrl}/`);
+        expect(profileLink.href).toBe(`${baseUrl}/profile`);
+        expect(spacesLink.href).toBe(`${baseUrl}/spaces`);
+        expect(loginLink.href).toBe(`${baseUrl}/login`);
+    })
+    
     
     
 })
